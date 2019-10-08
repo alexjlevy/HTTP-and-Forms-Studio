@@ -1,19 +1,52 @@
 <!doctype html>
 
 <head>
+	<style>
+		body{
+			background-image: url("https://www.steptwo.com.au/wp-content/uploads/kmc_fixingsearch-W.jpg");
+			text-align: center
+		}
+		label {
+			display: block;
+			color: black;
+			text-align: center
+		}
+		button {
+			background-color:#5e92db;
+			color: white;
+		}
+	</style>
 	<meta charset="utf-8">
 	<script>
-		// TODO: create a handler
     window.addEventListener("load", function(){
-        // TODO: register the handler
+		let form = document.getElementById("searchForm")
+			form.addEventListener("submit",function(){
+				let checkedBox = document.querySelector("input[name=engine]:checked")
+				let search = document.querySelector("input[name=q]")
+				let actions = {
+  				 "google": "https://www.google.com/",
+				 "duckDuckGo": "https://www.duckduckgo.com/",
+				 "bing": "https://bing.com/",
+				 "ask": "https://ask.com/"
+			};
+				if (checkedBox === null || search.value === ""){
+					alert("All fields are required!");
+					event.preventDefault();
+				} else {
+				form.setAttribute("action", actions[checkedBox.value])
+				}
+		})
     });
 	</script>
 </head>
-
 <body>
-
 	<form id="searchForm">
-    <!-- TODO: add form elements -->
+		<label>Search</label><input type ="text" name = "q"/></label>
+		<label>Google<input type ="radio" name = "engine" value="google"/></label>
+		<label>DuckDuckGo<input type ="radio" name = "engine" value="duckDuckGo"/></label>
+		<label>Bing<input type ="radio" name = "engine" value="bing"/></label>
+		<label>Ask<input type ="radio" name = "engine" value="ask"/></label>
+		<button value = "Go!">Submit</button>
 	</form>
 
 </body>
